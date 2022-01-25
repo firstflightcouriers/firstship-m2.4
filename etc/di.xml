@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Shipping\Block\Adminhtml\View">
+        <plugin disabled="false" name="Magento_Shipping_Block_Adminhtml_View" 
+            type="Firstflight\Firstship\Plugin\Magento\Shipping\Block\Adminhtml\View"/>
+    </type>
+    <type name="Magento\Shipping\Block\Adminhtml\Order\Tracking">
+        <plugin disabled="false" name="Magento_Shipping_Block_Adminhtml_Order_Tracking" 
+            type="Firstflight\Firstship\Plugin\Magento\Shipping\Block\Adminhtml\Order\Tracking"/>
+    </type>
+</config>

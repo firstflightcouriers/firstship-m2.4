@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <firstship>
+                <active>0</active>
+                <title>First Flight</title>
+                <name>First Flight Shipping</name>
+                <sallowspecific>0</sallowspecific>
+                <sort_order>15</sort_order>
+                <sandbox_api_password backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <live_api_password backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <model>Firstflight\Firstship\Model\Carrier</model>
+            </firstship>
+        </carriers>
+    </default>
+</config>

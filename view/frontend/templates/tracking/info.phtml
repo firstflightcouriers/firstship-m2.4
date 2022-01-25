@@ -1,0 +1,99 @@
+<?php
+/**
+ * @var \Firstflight\Firstship\Block\Tracking\Info $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+$tracks = $block->getTrack();
+if (isset($tracks['AirwayBillTrackList']) && $tracks['Code'] == 1):
+    foreach ($tracks['AirwayBillTrackList'] as $key => $track) { ?>
+        <div class="mb-2" id="1scroll">
+            <div id="h1">
+                <div class="media">
+                    <div class="position-relative w-100">
+                        <div class="summary-forbss">
+                            <b><?= $escaper->escapeHtml(__("Airway Bill No : %1", $track['AirWayBillNo']));?></b>
+                        </div>
+                    </div>
+                </div>
+                <div class="format-summary">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="media result-summary-status inactive-grey">
+                                <div class="title-hold">
+                                    <h4 class="status-title">
+                                        <?= $escaper->escapeHtml(__("With Delivery Courier"));?>
+                                    </h4>
+                                    <h6>
+                                        <?= $escaper->escapeHtml(__("Origin: %1", $track['Origin']))?> 
+                                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                                        <?= $escaper->escapeHtml(__("Destination: %1", $track['Destination']))?>
+                                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                                        <?= $escaper->escapeHtml(__("Reference: %1", $track['ShipperReference']))?>
+                                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                                        <?= $escaper->escapeHtml(__(
+                                            "Forwarding Number: %1",
+                                            $track['ForwardingNumber']
+                                        ))?>
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="step-counter">
+                                <ul>
+                                    <?php  for ($i=1; $i <= 5; $i++) { ?>
+                                        <?php if ($i <= $track['ShipmentProgress']) {?>
+                                            <li class="step<?= $escaper->escapeHtml($i)?> active"></li>
+                                        <?php } else {?>
+                                            <li class="step<?= $escaper->escapeHtml($i)?>"></li>
+                                        <?php }?>
+                                    <?php }?>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php if (isset($track['TrackingLogDetails'])) { ?>
+            <div class="table-wrapper">
+                <table class="data table table-items history">
+                    <?php foreach ($track['TrackingLogDetails'] as $index => $log) { ?>
+                        <tr>
+                            <th scope="col" class="col id"><?= $escaper->escapeHtml($log['ActivityDate'])?></th>
+                            <th scope="col" class="col location"><?= $escaper->escapeHtml(__("Location")) ?></th>
+                            <th scope="col" class="col time"><?= $escaper->escapeHtml(__("Time")) ?></th>
+                        </tr>
+                        <tr>
+                            <td data-th="<?= $escaper->escapeHtml(__('ID')) ?>" class="col id">
+                                <?= $escaper->escapeHtml($index)?> | <?= $escaper->escapeHtml($log['Remarks'])?>
+                            </td>
+                            <td data-th="<?= $escaper->escapeHtml(__('Location')) ?>" class="col name">
+                                <?= $escaper->escapeHtml($log['Location'])?>
+                            </td>
+                            <td data-th="<?= $escaper->escapeHtml(__('Time')) ?>" class="col email">
+                                <?= $escaper->escapeHtml($log['ActivityTime'])?>
+                            </td>
+                        </tr>
+                    <?php }?>
+                </table>
+            </div>
+        <?php } else { ?>
+            <span><?= $escaper->escapeHtml(__("No tracking info available"))?></span>
+        <?php }?>
+        <?php
+    }
+else:?>
+    <h1><?= $escaper->escapeHtml(__("Tracking infrormation is not available"))?></h1>
+<?php endif;?>
+<style>
+.step-counter li{
+  height: 8px;
+  display: inline-block;
+  background-color: #E8E8E8;
+  margin-right: 1px;
+  width: calc(100% / 5 - 4px);
+}
+.step-counter li.active {
+    background-color: #76BD22;
+}
+</style>

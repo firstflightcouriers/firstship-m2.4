@@ -1,0 +1,701 @@
+<?php
+/**
+ * @var \Firstflight\Firstship\Block\Adminhtml\AwbTemplate $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+$data =$block->getAwbFormData();
+$tracks =$block->getTrackData();
+?>
+<div id="popup-modal" style="display: none">
+    <form action="<?= $escaper->escapeUrl($block->getFormUrl())?>" method="post"
+          id="generate_awb_number_form">
+        <table class="data-table admin__control-table">
+            <tr>
+                <th>
+                    <?= $escaper->escapeHtml(__("Sender Info"))?>
+                </th>
+                <th>
+                    <?= $escaper->escapeHtml(__("Reciver Info"))?>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("Origin"))?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][Origin]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['Origin'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("AirWayBillCreatedBy"))?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][AirWayBillCreatedBy]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['AirWayBillCreatedBy'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("SendersAddress1"))?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][SendersAddress1]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['SendersAddress1'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("SendersAddress2"))?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][SendersAddress2]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['SendersAddress2'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("SendersCity"))?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][SendersCity]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['SendersCity'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("SendersSubCity"))?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][SendersSubCity]" 
+                                value="<?= (isset($data['AirwayBillData']['SendersSubCity']))?
+                                $escaper->escapeHtml($data['AirwayBillData']['SendersSubCity']):""?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("SendersCountry"))?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][SendersCountry]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['SendersCountry'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("SendersCompany"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][SendersCompany]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['SendersCompany'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("SendersContactPerson"))?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][SendersContactPerson]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['SendersContactPerson'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("SendersEmail"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][SendersEmail]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['SendersEmail'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("SendersGeoLocation"))?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][SendersGeoLocation]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['SendersGeoLocation'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("SendersMobile"))?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][SendersMobile]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['SendersMobile'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("SendersPhone"))?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][SendersPhone]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['SendersPhone'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("SendersPinCode"))?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][SendersPinCode]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['SendersPinCode'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("ReceiversAddress1"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][ReceiversAddress1]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['ReceiversAddress1'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("ReceiversAddress2"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][ReceiversAddress2]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['ReceiversAddress2'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("ReceiversCity"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][ReceiversCity]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['ReceiversCity'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("ReceiversSubCity"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][ReceiversSubCity]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['ReceiversSubCity'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("ReceiversCountry"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][ReceiversCountry]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['ReceiversCountry'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("ReceiversCompany"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][ReceiversCompany]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['ReceiversCompany'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("ReceiversContactPerson"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][ReceiversContactPerson]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['ReceiversContactPerson'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("ReceiversEmail"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][ReceiversEmail]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['ReceiversEmail'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("ReceiversGeoLocation"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][ReceiversGeoLocation]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['ReceiversGeoLocation'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("ReceiversMobile"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][ReceiversMobile]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['ReceiversMobile'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("ReceiversPhone"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][ReceiversPhone]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['ReceiversPhone'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("ReceiversPinCode"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][ReceiversPinCode]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['ReceiversPinCode'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("ReceiversProvince"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][ReceiversProvince]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['ReceiversProvince'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <?= $escaper->escapeHtml(__("Shipping Info"))?>
+                </th>
+                <th>
+                    <?= $escaper->escapeHtml(__("Other Info"))?>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("ShipmentDimension"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][ShipmentDimension]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['ShipmentDimension'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("ShipmentInvoiceCurrency"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][ShipmentInvoiceCurrency]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['ShipmentInvoiceCurrency'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("ShipmentInvoiceValue"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][ShipmentInvoiceValue]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['ShipmentInvoiceValue'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("ShipperReference"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][ShipperReference]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['ShipperReference'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("ShipperVatAccount"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][ShipperVatAccount]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['ShipperVatAccount'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("CODAmount"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][CODAmount]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['CODAmount'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("CODCurrency"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][CODCurrency]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['CODCurrency'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("Destination"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <?= /* @noEscape */($block->getDestination())?>  
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("DutyConsigneePay"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][DutyConsigneePay]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['DutyConsigneePay'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("GoodsDescription"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][GoodsDescription]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['GoodsDescription'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("NumberofPeices"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][NumberofPeices]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['NumberofPeices'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("ProductType"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][ProductType]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['ProductType'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("ServiceType"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][ServiceType]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['ServiceType'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("SpecialInstruction"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][SpecialInstruction]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['SpecialInstruction'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">
+                                <label for="admin_security_session_lifetime">
+                                    <?= $escaper->escapeHtml(__("Weight"));?>
+                                </label>
+                            </td>
+                            <td class="value">
+                                <input  
+                                name="awb[AirwayBillData][Weight]" 
+                                value="<?= $escaper->escapeHtml($data['AirwayBillData']['Weight'])?>" 
+                                class="input-text admin__control-text" type="text" >    
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+ 
+<div id="print-bill-model">
+    <table class="data-table admin__control-table">
+        <?php foreach ($tracks as $key => $track) {?>
+            <tr>
+                <th>
+                    <?= $escaper->escapeHtml($track->getData('title'))?>
+                </th>
+                <th>
+                    <?= $escaper->escapeHtml($track->getData('track_number'))?>
+                </th>
+                <td>
+                    <button onclick="window.open(
+                        '<?= $escaper->escapeUrl($block->getUrl('firstflight/action/printpackagingslip', [
+                            'tracking_id' => $track->getData('entity_id')
+                        ])) ?>','_blank'
+                    )">
+                        <?= $escaper->escapeHtml(__("Print this shiment"))?>
+                    </button>
+                </td>
+            </tr>
+        <?php } ?>
+    </table>
+</div>
+
+<script>
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function (
+            $,
+            modal
+        ) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: '<?= $escaper->escapeHtml(__("Airway Bill Data"))?>',
+                modalClass: 'custom-modal',
+                buttons: [
+                    {
+                        text: $.mage.__('Confirm'),
+                        class: '',
+                        click: function () {
+                            $('#generate_awb_number_form').append($('<input>', {
+                                'name': 'form_key',
+                                'value': window.FORM_KEY,
+                                'type': 'hidden'
+                            }));
+                            $('#generate_awb_number_form').submit();
+                        }
+                    },
+                ]
+            };
+            var popup = modal(options, $('#popup-modal'));
+
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: '<?= $escaper->escapeHtml(__("Print airway bill"))?>',
+                modalClass: 'custom-modal',
+                buttons: [
+                    {
+                        text: $.mage.__('Close'),
+                        class: '',
+                        click: function () {
+                            $("#print-bill-model").modal('closeModal');
+                        }
+                    },
+                ]
+            };
+            var printPopup = modal(options, $('#print-bill-model'));
+        }
+ 
+    );
+    function openFormModel() {
+        require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function (
+            $,
+            modal
+        ) {
+            $("#popup-modal").modal('openModal');
+        });
+    }
+    function openPrintModel() {
+        require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function (
+            $,
+            modal
+        ) {
+            $("#print-bill-model").modal('openModal');
+        });
+    }
+</script>

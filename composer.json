@@ -1,0 +1,34 @@
+{
+    "name": "firstflight/firstship",
+    "description": "Magento 2 First Flight extension",
+    "type": "magento2-module",
+    "version": "1.0.0",  
+    "require": {
+        "php": "~7.2.0||~7.3.0||~7.4.0", 
+        "laminas/laminas-barcode": "2.10.0"  
+    },
+    "license": [
+          "OSL-3.0",
+          "AFL-3.0"
+      ],
+    "keywords": [
+      "magento 2",
+      "firstflight"
+    ],
+    "authors": [
+      {
+        "name": "First Flight",
+        "email": "info@firstflightme.com",
+        "homepage": "https://firstflightme.com/",
+        "role": "Technical Support"
+      }
+    ],
+    "autoload": {
+      "files": [
+        "registration.php"
+      ],
+      "psr-4": {
+        "Firstflight\\Firstship\\": ""
+      }
+    }
+  }
