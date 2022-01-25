@@ -47,14 +47,14 @@
                         <field id="active">1</field>
                     </depends>
                 </field>
-                <field id="sendbox_api_username" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="sandbox_api_username" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Sandbox API username</label>
                     <depends>
                         <field id="sandbox_mode">1</field>
                         <field id="active">1</field>
                     </depends>
                 </field>
-                <field id="sendbox_api_password" translate="label" type="obscure" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="sandbox_api_password" translate="label" type="obscure" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Sandbox API password</label>
                     <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                     <depends>
@@ -103,7 +103,7 @@
                     </depends>
                 </field>
                 <field id="origin" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Origun</label>
+                    <label>Origin</label>
                     <source_model>Firstflight\Firstship\Model\Config\Source\Origin</source_model>
                     <frontend_class>origin</frontend_class>
                     <comment>This city list of Sales > Shipping Setting > Origin > Country.</comment>
