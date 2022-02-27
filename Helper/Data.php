@@ -16,6 +16,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /** @var \Magento\Framework\Pricing\Helper\Data */
     public $priceData;
 
+    protected $regionFactory;
+
+    protected $countryFactory;
+
     /** @var \Magento\Sales\Api\OrderAddressRepositoryInterface */
     protected $orderAddressRepositoryInterface;
     
@@ -42,6 +46,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         \Firstflight\Firstship\Model\Webservice $webService,
         \Magento\Sales\Api\OrderAddressRepositoryInterface $orderAddressRepositoryInterface,
         \Magento\Framework\Pricing\Helper\Data $priceData,
+        \Magento\Directory\Model\RegionFactory $regionFactory,
+        \Magento\Directory\Model\CountryFactory $countryFactory,
         ConfigData $config
     ) {
         $this->messageManager = $messageManager;
@@ -50,6 +56,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $this->priceData = $priceData;
         $this->webService = $webService;
         $this->orderAddressRepositoryInterface = $orderAddressRepositoryInterface;
+        $this->regionFactory = $regionFactory;
+        $this->_countryFactory = $countryFactory;
         parent::__construct($context);
     }
 
@@ -83,7 +91,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             "AccountNo" => $this->config->getAccountNo(),
             "Destination" => $data['dest_country_id'],
             "Dimension" => "",
-            "Origin" => $this->config->getOriginCountryId(),
+            "Origin" => $this->config->getOrigin(),
             "Product" => $this->config->getShippingType(),
             "ServiceType" => $this->config->getServiceType(),
             "UserName" => $this->config->getUserName(),
@@ -107,7 +115,18 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $payment = $order->getPayment();
         $method = $payment->getMethodInstance();
         $shippingAddress = $this->getCustomerShippingAddress($shipment->getShippingAddressId());
+        $billingAddress = $order->getBillingAddress()->getData();
+        $region = $this->regionFactory->create()->load($billingAddress['region_id']);
+        $regionCode = $region->getCode();
+        $country = $this->_countryFactory->create()->loadByCode($this->config->getOriginCountryId());
+        $countryName = $country->getName();
+        $receiversCountry = $this->_countryFactory->create()->loadByCode($shippingAddress->getCountryId());
+        $receiversCountryName = $receiversCountry->getName();
+
         $street = $shippingAddress->getStreet();
+        foreach ($order->getAllVisibleItems() as $_item) {
+              $productName = $_item->getName();
+        } 
 
         $data =  [
             'AirwayBillData' => [
@@ -115,9 +134,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
               .$this->config->getCurrentUser()->getLastname()),
               'CODAmount' => '0',
               'CODCurrency' => '',
+              'OriginCountry' => $countryName,
               'Destination' => "",
               'DutyConsigneePay' => '0',
-              'GoodsDescription' => 'ITEM DESCRIPTION',
+              'GoodsDescription' => $productName, //'ITEM DESCRIPTION',
               'NumberofPeices' => $shipment->getTotalQty(),
               'Origin' => $this->config->getOrigin(),
               'ProductType' => $this->config->getShippingType(),
@@ -125,7 +145,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
               'ReceiversAddress2' => (isset($street[1]))?$street[1]:null,
               'ReceiversCity' => $shippingAddress->getCity(),
               'ReceiversSubCity' => '',
-              'ReceiversCountry' => $shippingAddress->getCountryId(),
+              'ReceiversCountry' => $receiversCountryName,//$shippingAddress->getCountryId(),
               'ReceiversCompany' => $shippingAddress->getCompany(),
               'ReceiversContactPerson' => trim($shippingAddress->getPrefix().' '.$shippingAddress->getFirstname().' '
               .$shippingAddress->getLastname()),
@@ -138,7 +158,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
               'SendersAddress1' => $this->config->getOriginAddress1(),
               'SendersAddress2' => $this->config->getOriginAddress2(),
               'SendersCity' => $this->config->getOriginCity(),
-              'SendersSubCity ' => '',
+              'SendersSubCity' => $regionCode,
               'SendersCountry' => $this->config->getOriginCountryId(),
               'SendersCompany' => $this->config->getStoreName(),
               'SendersContactPerson' => $this->config->getStoreGeneralEmailSenderName(),
@@ -155,6 +175,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
               'ShipperVatAccount' => '',
               'SpecialInstruction' => '',
               'Weight' => $order->getWeight(),
+              "AccountNo" => $this->config->getAccountNo(),
             ]
         ];
         return $data;

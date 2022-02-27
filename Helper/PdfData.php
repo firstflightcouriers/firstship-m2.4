@@ -1,7 +1,7 @@
 <?php
 namespace Firstflight\Firstship\Helper;
 
-use Laminas\Barcode\Barcode;
+use Zend\Barcode\Barcode;
 use Magento\Framework\App\Filesystem\DirectoryList;
 
 class PdfData extends \Magento\Framework\App\Helper\AbstractHelper
@@ -15,7 +15,6 @@ class PdfData extends \Magento\Framework\App\Helper\AbstractHelper
     protected $filesystem;
     protected $directoryList;
     protected $shippingId;
-
     /**
      * constructor
      *
@@ -95,7 +94,7 @@ class PdfData extends \Magento\Framework\App\Helper\AbstractHelper
             $this->y - 60,
             $this->x + 555,
             $this->y - 60
-        );
+        ); // where
 
         $this->page->drawLine(
             $this->x - 20,
@@ -126,11 +125,11 @@ class PdfData extends \Magento\Framework\App\Helper\AbstractHelper
         );
 
         $this->page->drawLine(
-            $this->x + 240,
+            $this->x + 270,
             $this->y + 60,
-            $this->x + 240,
+            $this->x + 270,
             $this->y - 60
-        ); // vertical
+        ); // vertical - First logo row
 
         $this->page->drawLine(
             $this->x + 270,
@@ -140,46 +139,46 @@ class PdfData extends \Magento\Framework\App\Helper\AbstractHelper
         ); // vertical
 
         $this->page->drawLine(
-            $this->x + 140,
-            $this->y - 120,
-            $this->x + 140,
-            $this->y - 215
-        ); // vertical
+            $this->x + 270,
+            $this->y - 60,
+            $this->x + 270,
+            $this->y - 120
+        ); // vertical Service type
 
         $this->page->drawLine(
-            $this->x + 300,
-            $this->y - 120,
-            $this->x + 300,
+            $this->x + 270,
+            $this->y - 60,
+            $this->x + 270,
             $this->y - 215
-        ); // vertical
+        ); // vertical Service
 
         $this->page->drawLine(
             $this->x + 300,
             $this->y - 170,
-            $this->x + 555,
+            $this->x + 300,
             $this->y - 170
-        );
+        ); //sa
         
         $this->page->drawLine(
-            $this->x + 320,
+            $this->x + 270,
             $this->y - 215,
-            $this->x + 320,
-            $this->y - 280
-        ); // vertical
+            $this->x + 270,
+            $this->y - 120
+        ); // vertical 
 
         $this->page->drawLine(
-            $this->x + 420,
-            $this->y - 215,
-            $this->x + 420,
+            $this->x + 270,
+            $this->y - 60,
+            $this->x + 270,
             $this->y - 280
-        ); // vertical
+        ); // vertical 
 
         $this->page->drawLine(
             $this->x + 270,
             $this->y - 280,
             $this->x + 270,
             $this->y - 470
-        ); // vertical
+        ); // vertical sender - reciever
     }
 
     public function addLogo()
@@ -193,9 +192,9 @@ class PdfData extends \Magento\Framework\App\Helper\AbstractHelper
         $image = \Zend_Pdf_Image::imageWithPath($imagePath);
         
         //top border of the page
-        $widthLimit = 270;
+        $widthLimit = 226;
         //half of the page width
-        $heightLimit = 270;
+        $heightLimit = 92;
         //assuming the image is not a "skyscraper"
         $width = $image->getPixelWidth();
         $height = $image->getPixelHeight();
@@ -279,119 +278,148 @@ class PdfData extends \Magento\Framework\App\Helper\AbstractHelper
         $viewPath = $this->moduleDir->getDir('Firstflight_Firstship', \Magento\Framework\Module\Dir::MODULE_VIEW_DIR);
         $filePath = $viewPath.DIRECTORY_SEPARATOR."adminhtml".
         DIRECTORY_SEPARATOR."web".DIRECTORY_SEPARATOR."fonts".DIRECTORY_SEPARATOR;
+        
+        $font = \Zend_Pdf_Font::fontWithPath(
+            $filePath.'GnuFreeFont/FreeSerif.ttf'
+        );
+        $this->style->setFont($font, 40);
+        $this->page->setStyle($this->style);
+        $this->style->setFillColor(new \Zend_Pdf_Color_Html('#0a0b1d'));
+        $this->style->setFont($font, 20);
+        $this->page->setStyle($this->style);
+        $this->page->drawText(__("ORGN"), 60, $this->pageHight - 160, 'UTF-8');
+
         $font = \Zend_Pdf_Font::fontWithPath(
             $filePath.'Roboto/Roboto-Medium.ttf'
         );
-        $this->style->setFont($font, 44);
+        $this->style->setFont($font, 30);
         $this->page->setStyle($this->style);
-        $this->page->drawText(__("AE-DXB"), 60, 760, 'UTF-8');
+        //$this->page->drawText(__("AE-DXB"), 80, 760, 'UTF-8'); SendersCity
+         $this->page->drawText($data['AirwayBillData']['SendersCountry'].' - '.$data['AirwayBillData']['SendersSubCity'], 80, 760, 'UTF-8');
  
         $this->style->setFillColor(new \Zend_Pdf_Color_Html('#626a70'));
-        $this->style->setFont($font, 22);
+        $this->style->setFont($font, 20);
         $this->page->setStyle($this->style);
-        $this->page->drawText($data['AirwayBillData']['SendersCity'], 110, $this->pageHight - 160, 'UTF-8');
+        $this->page->drawText($data['AirwayBillData']['SendersCity'], 60, $this->pageHight - 185, 'UTF-8');
 
+       
         $font = \Zend_Pdf_Font::fontWithPath(
             $filePath.'GnuFreeFont/FreeSerif.ttf'
         );
-        $this->style->setFont($font, 44);
+        $this->style->setFont($font, 40);
         $this->page->setStyle($this->style);
         $this->style->setFillColor(new \Zend_Pdf_Color_Html('#0a0b1d'));
-        $this->style->setFont($font, 22);
+        $this->style->setFont($font, 20);
         $this->page->setStyle($this->style);
-        $this->page->drawText(__("ORGN"), 115, $this->pageHight - 185, 'UTF-8');
+        $this->page->drawText(__("DEST"), 190, $this->pageHight - 160, 'UTF-8');
 
         $font = \Zend_Pdf_Font::fontWithPath(
             $filePath.'Roboto/Roboto-Medium.ttf'
         );
-        $this->style->setFont($font, 44);
+        $this->style->setFont($font, 40);
         $this->page->setStyle($this->style);
         $this->style->setFillColor(new \Zend_Pdf_Color_Html('#626a70'));
-        $this->style->setFont($font, 22);
+        $this->style->setFont($font, 20);
         $this->page->setStyle($this->style);
-        $this->page->drawText($data['AirwayBillData']['ReceiversCity'], 415, $this->pageHight - 160, 'UTF-8');
+        $this->page->drawText($data['AirwayBillData']['ReceiversCity'], 190, $this->pageHight - 185, 'UTF-8');
+       
 
         $font = \Zend_Pdf_Font::fontWithPath(
             $filePath.'GnuFreeFont/FreeSerif.ttf'
         );
-        $this->style->setFont($font, 44);
+        $this->style->setFont($font, 40);
         $this->page->setStyle($this->style);
         $this->style->setFillColor(new \Zend_Pdf_Color_Html('#0a0b1d'));
-        $this->style->setFont($font, 22);
+        $this->style->setFont($font, 20);
         $this->page->setStyle($this->style);
-        $this->page->drawText(__("DEST"), 420, $this->pageHight - 185, 'UTF-8');
+        $this->page->drawText(__("ACCOUNT NUMBER"), 355, $this->pageHight - 160, 'UTF-8');
+
 
         $font = \Zend_Pdf_Font::fontWithPath(
             $filePath.'Roboto/Roboto-Medium.ttf'
         );
-        $this->style->setFont($font, 44);
+        $this->style->setFont($font, 40);
         $this->page->setStyle($this->style);
         $this->style->setFillColor(new \Zend_Pdf_Color_Html('#626a70'));
-        $this->style->setFont($font, 22);
+        $this->style->setFont($font, 20);
+        $this->page->setStyle($this->style);
+        $this->page->drawText($data['AirwayBillData']['AccountNo'], 435, $this->pageHight - 185, 'UTF-8');
+
+        $font = \Zend_Pdf_Font::fontWithPath(
+             $filePath.'GnuFreeFont/FreeSerif.ttf'
+        );
+        $this->style->setFont($font, 40);
+        $this->page->setStyle($this->style);
+        $this->style->setFillColor(new \Zend_Pdf_Color_Html('#0a0b1d'));
+        $this->style->setFont($font, 20);
         $this->page->setStyle($this->style);
         $this->page->drawText(__("DOMESTIC"), 35, $this->pageHight - 230, 'UTF-8');
 
         $font = \Zend_Pdf_Font::fontWithPath(
             $filePath.'Roboto/Roboto-Medium.ttf'
         );
-        $this->style->setFont($font, 44);
-        $this->page->setStyle($this->style);
-        $this->style->setFillColor(new \Zend_Pdf_Color_Html('#0a0b1d'));
-        $this->style->setFont($font, 22);
-        $this->page->setStyle($this->style);
-        $this->page->drawText(__("PKGT"), 60, $this->pageHight - 280, 'UTF-8');
-
-        $font = \Zend_Pdf_Font::fontWithPath(
-            $filePath.'Roboto/Roboto-Medium.ttf'
-        );
-        $this->style->setFont($font, 44);
+        $this->style->setFont($font, 40);
         $this->page->setStyle($this->style);
         $this->style->setFillColor(new \Zend_Pdf_Color_Html('#626a70'));
-        $this->style->setFont($font, 22);
+        $this->style->setFont($font, 20);
         $this->page->setStyle($this->style);
-        $this->page->drawText(__("PARCEL"), 215, $this->pageHight - 230, 'UTF-8');
+        $this->page->drawText(__("PKGT"), 60, $this->pageHight - 265, 'UTF-8');
+
+        $font = \Zend_Pdf_Font::fontWithPath(
+             $filePath.'GnuFreeFont/FreeSerif.ttf'
+        );
+        $this->style->setFont($font, 40);
+        $this->page->setStyle($this->style);
+        $this->style->setFillColor(new \Zend_Pdf_Color_Html('#0a0b1d'));
+        $this->style->setFont($font, 20);
+        $this->page->setStyle($this->style);
+        $this->page->drawText(__("PARCEL"), 188, $this->pageHight - 230, 'UTF-8');
 
         $font = \Zend_Pdf_Font::fontWithPath(
             $filePath.'Roboto/Roboto-Medium.ttf'
         );
-        $this->style->setFont($font, 44);
+        $this->style->setFont($font, 40);
         $this->page->setStyle($this->style);
-        $this->style->setFillColor(new \Zend_Pdf_Color_Html('#0a0b1d'));
-        $this->style->setFont($font, 22);
+        $this->style->setFillColor(new \Zend_Pdf_Color_Html('#626a70'));
+        $this->style->setFont($font, 20);
         $this->page->setStyle($this->style);
-        $this->page->drawText(__("PDTT"), 225, $this->pageHight - 280, 'UTF-8');
+        $this->page->drawText(__("PDTT"), 188, $this->pageHight - 265, 'UTF-8');
 
         $font = \Zend_Pdf_Font::fontWithPath(
-            $filePath.'Roboto/Roboto-Regular.ttf'
+             $filePath.'GnuFreeFont/FreeSerif.ttf'
         );
-        $this->style->setFont($font, 44);
+        $this->style->setFont($font, 40);
         $this->page->setStyle($this->style);
         $this->style->setFillColor(new \Zend_Pdf_Color_Html('#0a0b1d'));
-        $this->style->setFont($font, 26);
+        $this->style->setFont($font, 20);
         $this->page->setStyle($this->style);
-        $this->page->drawText($data['AirwayBillData']['ServiceType'], 425, $this->pageHight - 230, 'UTF-8');
+        $this->page->drawText(__("SERVICE TYPE"), 355, $this->pageHight - 230, 'UTF-8');
 
-        $this->page->setLineDashingPattern(
-            [4],
+        $font = \Zend_Pdf_Font::fontWithPath(
+            $filePath.'Roboto/Roboto-Medium.ttf'
+        );
+        $this->style->setFont($font, 40);
+        $this->page->setStyle($this->style);
+        $this->style->setFillColor(new \Zend_Pdf_Color_Html('#626a70'));
+        $this->style->setFont($font, 20);
+        $this->page->setStyle($this->style);
+        $this->page->drawText($data['AirwayBillData']['ServiceType'], 410, $this->pageHight - 265, 'UTF-8');
+
+       $this->page->setLineDashingPattern(
+            [5],
             1.6
         );
-        $this->page->drawLine(
-            $this->x + 395,
-            $this->y - 160,
-            $this->x + 450,
-            $this->y - 160
-        ); // vertical
 
         if ($data['AirwayBillData']['ServiceType'] == "CAD") {
-            $this->page->drawText(__("Amount"), $this->x + 325, $this->pageHight - 275, 'UTF-8');
+            $this->page->drawText(__("Amount"), $this->x + 425, $this->pageHight - 265, 'UTF-8');
 
             $font = \Zend_Pdf_Font::fontWithPath(
-                $filePath.'Roboto/Roboto-Medium.ttf'
+                 $filePath.'GnuFreeFont/FreeSerif.ttf'
             );
-            $this->style->setFont($font, 44);
+            $this->style->setFont($font, 40);
             $this->page->setStyle($this->style);
             $this->style->setFillColor(new \Zend_Pdf_Color_Html('#0a0b1d'));
-            $this->style->setFont($font, 22);
+            $this->style->setFont($font, 20);
             $this->page->setStyle($this->style);
             $this->page->drawText(
                 substr($this->data->roundPrice(
@@ -403,12 +431,12 @@ class PdfData extends \Magento\Framework\App\Helper\AbstractHelper
             );
         }
         $this->style->setFillColor(new \Zend_Pdf_Color_Html('#0a0b1d'));
-        $this->style->setFont($font, 22);
+        $this->style->setFont($font, 20);
         $this->page->setStyle($this->style);
         $this->page->drawText(__("Ref:"), $this->x + 5, $this->pageHight - 315, 'UTF-8');
 
         $this->style->setFillColor(new \Zend_Pdf_Color_Html('#626a70'));
-        $this->style->setFont($font, 22);
+        $this->style->setFont($font, 20);
         $this->page->setStyle($this->style);
         $this->page->drawText(
             $data['AirwayBillData']['ShipperReference'],
@@ -418,39 +446,41 @@ class PdfData extends \Magento\Framework\App\Helper\AbstractHelper
         );
 
         $this->style->setFillColor(new \Zend_Pdf_Color_Html('#0a0b1d'));
-        $this->style->setFont($font, 22);
+        $this->style->setFont($font, 20);
         $this->page->setStyle($this->style);
         $this->page->drawText(__("Date:"), $this->x + 5, $this->pageHight - 345, 'UTF-8');
 
         $this->style->setFillColor(new \Zend_Pdf_Color_Html('#626a70'));
-        $this->style->setFont($font, 22);
+        $this->style->setFont($font, 20);
         $this->page->setStyle($this->style);
         $this->page->drawText($data['shipping_create_at'], $this->x + 65, $this->pageHight - 345, 'UTF-8');
         
         $this->style->setFillColor(new \Zend_Pdf_Color_Html('#0a0b1d'));
+        $this->style->setFont($font, 21);
+        $this->page->setStyle($this->style);
+        $this->page->drawText(__("PCS"), $this->x + 327, $this->pageHight - 310, 'UTF-8');
+        
+        $this->style->setFillColor(new \Zend_Pdf_Color_Html('#626a70'));
         $this->style->setFont($font, 20);
         $this->page->setStyle($this->style);
         $this->page->drawText($this->data->roundPrice(
             $data['AirwayBillData']['NumberofPeices'],
             false
-        ), $this->x + 360, $this->pageHight - 310, 'UTF-8');
+        ), $this->x + 343, $this->pageHight - 340, 'UTF-8');
 
-        $this->style->setFont($font, 21);
+        $this->style->setFillColor(new \Zend_Pdf_Color_Html('#0a0b1d'));
+        $this->style->setFont($font, 20);
         $this->page->setStyle($this->style);
-        $this->page->drawText(__("PCS"), $this->x + 350, $this->pageHight - 340, 'UTF-8');
+        $this->page->drawText(__("WT"), $this->x + 470, $this->pageHight - 310, 'UTF-8');        
 
         $this->style->setFillColor(new \Zend_Pdf_Color_Html('#626a70'));
-        $this->style->setFont($font, 22);
+        $this->style->setFont($font, 20);
         $this->page->setStyle($this->style);
         $this->page->drawText(__("%1 Kgs", $this->data->roundPrice(
             $data['AirwayBillData']['Weight'],
             false
-        )), $this->x + 440, $this->pageHight - 315, 'UTF-8');
-        
-        $this->style->setFillColor(new \Zend_Pdf_Color_Html('#0a0b1d'));
-        $this->style->setFont($font, 20);
-        $this->page->setStyle($this->style);
-        $this->page->drawText(__("WT"), $this->x + 470, $this->pageHight - 340, 'UTF-8');
+        )), $this->x + 460, $this->pageHight - 340, 'UTF-8');        
+      
 
         $font = \Zend_Pdf_Font::fontWithPath(
             $filePath.'Roboto/Roboto-Regular.ttf'
@@ -465,8 +495,8 @@ class PdfData extends \Magento\Framework\App\Helper\AbstractHelper
             $filePath.'LinLibertineFont/LinLibertine_Bd-2.8.1.ttf'
         );
         $this->page->setStyle($this->style);
-        $this->style->setFillColor(new \Zend_Pdf_Color_Html('#000000'));
-        $this->style->setFont($font, 26);
+        $this->style->setFillColor(new \Zend_Pdf_Color_Html('#0a0b1d'));
+        $this->style->setFont($font, 20);
         $this->page->setStyle($this->style);
         $this->page->drawText(
             $data['AirwayBillData']['SendersContactPerson'],
@@ -498,14 +528,14 @@ class PdfData extends \Magento\Framework\App\Helper\AbstractHelper
             'UTF-8'
         );
         $this->page->drawText(
-            $data['AirwayBillData']['SendersCity'],
+            $data['AirwayBillData']['SendersCity'].' , '.$data['AirwayBillData']['OriginCountry'],
             $this->x - 6,
             $this->pageHight - 500,
             'UTF-8'
         );
 
         $this->style->setFont($font, 24);
-        $this->style->setFillColor(new \Zend_Pdf_Color_Html('#000000'));
+        $this->style->setFillColor(new \Zend_Pdf_Color_Html('#0a0b1d'));
         $this->page->setStyle($this->style);
         $this->page->drawText(__("Ph: "), $this->x - 6, $this->pageHight - 530, 'UTF-8');
         $this->page->drawText(
@@ -528,8 +558,8 @@ class PdfData extends \Magento\Framework\App\Helper\AbstractHelper
             $filePath.'LinLibertineFont/LinLibertine_Bd-2.8.1.ttf'
         );
         $this->page->setStyle($this->style);
-        $this->style->setFillColor(new \Zend_Pdf_Color_Html('#000000'));
-        $this->style->setFont($font, 26);
+        $this->style->setFillColor(new \Zend_Pdf_Color_Html('#0a0b1d'));
+        $this->style->setFont($font, 20);
         $this->page->setStyle($this->style);
         $this->page->drawText(
             $data['AirwayBillData']['ReceiversContactPerson'],
@@ -561,11 +591,11 @@ class PdfData extends \Magento\Framework\App\Helper\AbstractHelper
             'UTF-8'
         );
         $this->page->drawText(
-            $data['AirwayBillData']['ReceiversCity'],
+            $data['AirwayBillData']['ReceiversCity'].' , '.$data['AirwayBillData']['ReceiversCountry'],
             $this->x + 280,
             $this->pageHight - 500,
             'UTF-8'
-        );
+        );        
  
         $this->style->setFont($font, 24);
         $this->style->setFillColor(new \Zend_Pdf_Color_Html('#000000'));
