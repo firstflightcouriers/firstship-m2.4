@@ -185,7 +185,7 @@ class PdfData extends \Magento\Framework\App\Helper\AbstractHelper
     {
         // Add logo image
         $viewPath = $this->moduleDir->getDir('Firstflight_Firstship', \Magento\Framework\Module\Dir::MODULE_VIEW_DIR);
-        $logoFile = DIRECTORY_SEPARATOR."logo.png";
+        $logoFile = DIRECTORY_SEPARATOR."logo.jpg";
         $filePath = DIRECTORY_SEPARATOR."adminhtml".DIRECTORY_SEPARATOR."web".DIRECTORY_SEPARATOR."image".$logoFile;
         $imagePath = $viewPath.$filePath;
         
@@ -212,8 +212,8 @@ class PdfData extends \Magento\Framework\App\Helper\AbstractHelper
             $width = $widthLimit;
         }
         
-        $y1 = 800 - $height;
-        $y2 = 800;
+        $y1 = 810 - $height;
+        $y2 = 810;
         $x1 = 330;
         $x2 = $x1 + $width;
         
@@ -348,22 +348,6 @@ class PdfData extends \Magento\Framework\App\Helper\AbstractHelper
         $font = \Zend_Pdf_Font::fontWithPath(
              $filePath.'GnuFreeFont/FreeSerif.ttf'
         );
-        $this->style->setFont($font, 40);
-        $this->page->setStyle($this->style);
-        $this->style->setFillColor(new \Zend_Pdf_Color_Html('#0a0b1d'));
-        $this->style->setFont($font, 20);
-        $this->page->setStyle($this->style);
-        $this->page->drawText(__("DOMESTIC"), 35, $this->pageHight - 230, 'UTF-8');
-
-        $font = \Zend_Pdf_Font::fontWithPath(
-            $filePath.'Roboto/Roboto-Medium.ttf'
-        );
-        $this->style->setFont($font, 40);
-        $this->page->setStyle($this->style);
-        $this->style->setFillColor(new \Zend_Pdf_Color_Html('#626a70'));
-        $this->style->setFont($font, 20);
-        $this->page->setStyle($this->style);
-        $this->page->drawText(__("PKGT"), 60, $this->pageHight - 265, 'UTF-8');
 
         $font = \Zend_Pdf_Font::fontWithPath(
              $filePath.'GnuFreeFont/FreeSerif.ttf'
@@ -373,7 +357,7 @@ class PdfData extends \Magento\Framework\App\Helper\AbstractHelper
         $this->style->setFillColor(new \Zend_Pdf_Color_Html('#0a0b1d'));
         $this->style->setFont($font, 20);
         $this->page->setStyle($this->style);
-        $this->page->drawText(__("PARCEL"), 188, $this->pageHight - 230, 'UTF-8');
+        $this->page->drawText(__("PRODUCT"), 93, $this->pageHight - 230, 'UTF-8');
 
         $font = \Zend_Pdf_Font::fontWithPath(
             $filePath.'Roboto/Roboto-Medium.ttf'
@@ -383,7 +367,7 @@ class PdfData extends \Magento\Framework\App\Helper\AbstractHelper
         $this->style->setFillColor(new \Zend_Pdf_Color_Html('#626a70'));
         $this->style->setFont($font, 20);
         $this->page->setStyle($this->style);
-        $this->page->drawText(__("PDTT"), 188, $this->pageHight - 265, 'UTF-8');
+        $this->page->drawText(__("PARCEL"), 100, $this->pageHight - 265, 'UTF-8');
 
         $font = \Zend_Pdf_Font::fontWithPath(
              $filePath.'GnuFreeFont/FreeSerif.ttf'
