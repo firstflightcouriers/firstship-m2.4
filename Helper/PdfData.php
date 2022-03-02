@@ -332,7 +332,7 @@ class PdfData extends \Magento\Framework\App\Helper\AbstractHelper
         $this->style->setFillColor(new \Zend_Pdf_Color_Html('#0a0b1d'));
         $this->style->setFont($font, 20);
         $this->page->setStyle($this->style);
-        $this->page->drawText(__("ACCOUNT NUMBER"), 355, $this->pageHight - 160, 'UTF-8');
+        $this->page->drawText(__("ACCOUNT NUMBER"), 345, $this->pageHight - 160, 'UTF-8');
 
 
         $font = \Zend_Pdf_Font::fontWithPath(
@@ -343,7 +343,7 @@ class PdfData extends \Magento\Framework\App\Helper\AbstractHelper
         $this->style->setFillColor(new \Zend_Pdf_Color_Html('#626a70'));
         $this->style->setFont($font, 20);
         $this->page->setStyle($this->style);
-        $this->page->drawText($data['AirwayBillData']['AccountNo'], 435, $this->pageHight - 185, 'UTF-8');
+        $this->page->drawText($data['AirwayBillData']['AccountNo'], 425, $this->pageHight - 185, 'UTF-8');
 
         $font = \Zend_Pdf_Font::fontWithPath(
              $filePath.'GnuFreeFont/FreeSerif.ttf'
@@ -377,7 +377,7 @@ class PdfData extends \Magento\Framework\App\Helper\AbstractHelper
         $this->style->setFillColor(new \Zend_Pdf_Color_Html('#0a0b1d'));
         $this->style->setFont($font, 20);
         $this->page->setStyle($this->style);
-        $this->page->drawText(__("SERVICE TYPE"), 355, $this->pageHight - 230, 'UTF-8');
+        $this->page->drawText(__("SERVICE TYPE"), 345, $this->pageHight - 230, 'UTF-8');
 
         $font = \Zend_Pdf_Font::fontWithPath(
             $filePath.'Roboto/Roboto-Medium.ttf'
@@ -387,7 +387,7 @@ class PdfData extends \Magento\Framework\App\Helper\AbstractHelper
         $this->style->setFillColor(new \Zend_Pdf_Color_Html('#626a70'));
         $this->style->setFont($font, 20);
         $this->page->setStyle($this->style);
-        $this->page->drawText($data['AirwayBillData']['ServiceType'], 410, $this->pageHight - 265, 'UTF-8');
+        $this->page->drawText($data['AirwayBillData']['ServiceType'], 400, $this->pageHight - 265, 'UTF-8');
 
        $this->page->setLineDashingPattern(
             [5],
@@ -395,22 +395,31 @@ class PdfData extends \Magento\Framework\App\Helper\AbstractHelper
         );
 
         if ($data['AirwayBillData']['ServiceType'] == "CAD") {
-            $this->page->drawText(__("Amount"), $this->x + 425, $this->pageHight - 265, 'UTF-8');
-
             $font = \Zend_Pdf_Font::fontWithPath(
-                 $filePath.'GnuFreeFont/FreeSerif.ttf'
+               $filePath.'GnuFreeFont/FreeSerif.ttf'
             );
             $this->style->setFont($font, 40);
             $this->page->setStyle($this->style);
             $this->style->setFillColor(new \Zend_Pdf_Color_Html('#0a0b1d'));
             $this->style->setFont($font, 20);
             $this->page->setStyle($this->style);
+            $this->page->drawText(__("AMOUNT"), $this->x + 462, $this->pageHight - 230, 'UTF-8');
+
+           
+            $font = \Zend_Pdf_Font::fontWithPath(
+                 $filePath.'Roboto/Roboto-Medium.ttf'
+            );
+            $this->style->setFont($font, 40);
+            $this->page->setStyle($this->style);
+            $this->style->setFillColor(new \Zend_Pdf_Color_Html('#626a70'));
+            $this->style->setFont($font, 20);
+            $this->page->setStyle($this->style);
             $this->page->drawText(
                 substr($this->data->roundPrice(
                     $data['AirwayBillData']['ShipmentInvoiceValue']
                 ), 0, -3),
-                $this->x + 430,
-                $this->pageHight - 275,
+                $this->x + 472,
+                $this->pageHight - 265,
                 'UTF-8'
             );
         }
@@ -442,7 +451,7 @@ class PdfData extends \Magento\Framework\App\Helper\AbstractHelper
         $this->style->setFillColor(new \Zend_Pdf_Color_Html('#0a0b1d'));
         $this->style->setFont($font, 21);
         $this->page->setStyle($this->style);
-        $this->page->drawText(__("PCS"), $this->x + 327, $this->pageHight - 310, 'UTF-8');
+        $this->page->drawText(__("PCS"), $this->x + 318, $this->pageHight - 310, 'UTF-8');
         
         $this->style->setFillColor(new \Zend_Pdf_Color_Html('#626a70'));
         $this->style->setFont($font, 20);
@@ -450,12 +459,12 @@ class PdfData extends \Magento\Framework\App\Helper\AbstractHelper
         $this->page->drawText($this->data->roundPrice(
             $data['AirwayBillData']['NumberofPeices'],
             false
-        ), $this->x + 343, $this->pageHight - 340, 'UTF-8');
+        ), $this->x + 333, $this->pageHight - 340, 'UTF-8');
 
         $this->style->setFillColor(new \Zend_Pdf_Color_Html('#0a0b1d'));
         $this->style->setFont($font, 20);
         $this->page->setStyle($this->style);
-        $this->page->drawText(__("WT"), $this->x + 470, $this->pageHight - 310, 'UTF-8');        
+        $this->page->drawText(__("WT"), $this->x + 460, $this->pageHight - 310, 'UTF-8');        
 
         $this->style->setFillColor(new \Zend_Pdf_Color_Html('#626a70'));
         $this->style->setFont($font, 20);
@@ -463,7 +472,7 @@ class PdfData extends \Magento\Framework\App\Helper\AbstractHelper
         $this->page->drawText(__("%1 Kgs", $this->data->roundPrice(
             $data['AirwayBillData']['Weight'],
             false
-        )), $this->x + 460, $this->pageHight - 340, 'UTF-8');        
+        )), $this->x + 450, $this->pageHight - 340, 'UTF-8');        
       
 
         $font = \Zend_Pdf_Font::fontWithPath(
