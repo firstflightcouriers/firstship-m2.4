@@ -130,8 +130,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
         $data =  [
             'AirwayBillData' => [
-              'AirWayBillCreatedBy' => trim($this->config->getCurrentUser()->getFirstname(). " "
-              .$this->config->getCurrentUser()->getLastname()),
+              //'AirWayBillCreatedBy' => trim($this->config->getCurrentUser()->getFirstname(). " "
+              //.$this->config->getCurrentUser()->getLastname()),
+              'AirWayBillCreatedBy' => 'Magento',
               'CODAmount' => '0',
               'CODCurrency' => '',
               'OriginCountry' => $countryName,
