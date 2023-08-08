@@ -21,6 +21,3 @@ Step 7: php bin/magento cache:flush
 Step 8: Now your extension is installed successfully. 
 
 
-Workflow Guide Video
-=====================
-https://watch.screencastify.com/v/a4mHJCweRERjjSezOQNT
